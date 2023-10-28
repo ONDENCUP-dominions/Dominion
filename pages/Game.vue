@@ -2,6 +2,16 @@
 import { useCounterStore } from '@/stores/store';
 const store =  useCounterStore();
 const router = useRouter();
+
+import { filename } from 'pathe/utils';
+
+const glob = import.meta.glob('~/public/*jpg', { eager: true });
+const images = Object.fromEntries(
+  Object.entries(glob).map(([key, value]) => [filename(key), value.default])
+);
+
+const dynamic_image_name = ['Jolteon','nanjamo'];
+
 function upCount1() {
   if(store.allScore < 60){
     store.count1++;
@@ -52,6 +62,7 @@ function downCount4(){
 }
 function onClickNext(){
   store.gameCount++;
+  console.log(store.gameCount);
   if(store.gameCount === 10){
     console.log("終了");;
     router.push({ path: "/gameresult" })
@@ -62,7 +73,7 @@ function onClickNext(){
 <template>
   <div class="flex-content">
     <Button class="next-button" @click="onClickNext">Next{{ store.gameCount }}</Button>
-    <div class="card"></div>
+    <img class="card" :src="images[dynamic_image_name[store.gameCount]]" />
     <CountButton class="count1-button">
       <div @click="upCount1">＋</div>
       {{ store.count1 }}
