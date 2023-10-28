@@ -1,31 +1,38 @@
-name: Upload files to S3
+name: Deploy to S3 and Update Lambda
 
 on:
   push:
     branches:
-    - main
-
-env:
-  MY_AWS_REGION: 'ap-northeast-1'
-  AWS_ROLENAME: 'role_githubactions_s3sync'
-  AWS_S3_BUCKET: 'bucket-name'
-  SOURCE_DIR: '.'
-  DEST_DIR: 'dir'
+      - main
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    permissions:
-      id-token: write
-      contents: read
+
     steps:
-    - name: Checkout
-      uses: actions/checkout@master
-    - name: Configure AWS credentials with IAM Role
-      uses: aws-actions/configure-aws-credentials@main
-      with:
-        role-to-assume: arn:aws:iam::${{secrets.AWS_ACCOUNT_ID}}:role/${{secrets.AWS_ROLENAME}}
-        aws-region: ${{secrets.MY_AWS_REGION}}
-    - name: Copy files to S3
-      run: |
-          aws s3 sync ${{secrets.SOURCE_DIR}} s3://${{secrets.AWS_S3_BUCKET}}
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 18.x
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build Nuxt.js application
+        run: npm run build
+
+      - name: AWS Configure
+        run: aws configure set aws_access_key_id ${{secrets.AWS_ACCOUNT_ID}}
+        shell: bash
+        env:
+          AWS_ACCESS_KEY_ID: ${{secrets.AWS_ACCOUNT_ID}}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCOUNT_KEY }}
+          AWS_DEFAULT_REGION: ${{secrets.MY_AWS_REGION}}
+
+      - name: Upload to S3
+        run: aws s3 sync ${{secrets.SOURCE_DIR}}  s3://${{secrets.AWS_S3_BUCKET}}
+        env:
+          AWS_DEFAULT_REGION: ${{secrets.MY_AWS_REGION}}
