@@ -25,26 +25,34 @@ function upCount4() {
 function downCount4(){
     store.count4--;
 }
+function onClickNext(){
+  store.gameCount++;
+  if(store.gameCount === 10){
+    console.log("終了");
+  }
+}
 </script>
 
 <template>
   <div class="flex-content">
-    <CountButton>
+    <Button class="next-button" @click="onClickNext">Next{{ store.gameCount }}</Button>
+    <div class="card"></div>
+    <CountButton class="count1-button">
       <div @click="upCount1">＋</div>
       {{ store.count1 }}
       <div @click="downCount1">－</div>
     </CountButton>
-    <CountButton>
+    <CountButton class="count-button">
       <div @click="upCount2">＋</div>
       {{ store.count2 }}
       <div @click="downCount2">－</div>
     </CountButton>
-    <CountButton>
+    <CountButton class="count-button">
       <div @click="upCount3">＋</div>
       {{ store.count3 }}
       <div @click="downCount3">－</div>
     </CountButton>
-    <CountButton>
+    <CountButton class="count-button">
       <div @click="upCount4">＋</div>
       {{ store.count4 }}
       <div @click="downCount4">－</div>
@@ -57,6 +65,21 @@ function downCount4(){
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+.next-button{
+  margin-top: 26px;
+}
+.card{
+  background-color: gray;
+  width: 130px;
+  height: 180px;
+  margin-top: 30px;
+}
+.count1-button{
+  margin-top: 30px;
+}
+.count-button{
+  margin-top: 10px;
 }
 </style>
   
