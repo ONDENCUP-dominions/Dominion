@@ -1,9 +1,21 @@
 <script setup lang="ts">
 import { useCounterStore } from '@/stores/store';
+import { filename } from 'pathe/utils';
+import { onMounted } from 'vue';
+
 const store =  useCounterStore();
 const router = useRouter();
 
-import { filename } from 'pathe/utils';
+onMounted(() =>{
+  console.log('onMounted');
+  store.gameCount = 0;
+  store.count1 = 0;
+  store.count2 = 0;
+  store.count3 = 0;
+  store.count4 = 0;
+  store.allScore = 0;
+})
+
 
 const glob = import.meta.glob('~/public/*jpg', { eager: true });
 const images = Object.fromEntries(
@@ -13,7 +25,7 @@ const images = Object.fromEntries(
 const dynamic_image_name = ['Jolteon','nanjamo'];
 
 function upCount1() {
-  if(store.allScore < 60){
+  if(store.allScore < store.gameCount + 1){
     store.count1++;
     store.allScore++;
   };
@@ -25,7 +37,7 @@ function downCount1(){
   };
 }
 function upCount2() {
-  if(store.allScore < 60){
+  if(store.allScore < store.gameCount + 1){
     store.count2++;
     store.allScore++;
   };
@@ -37,7 +49,7 @@ function downCount2(){
   };
 }
 function upCount3() {
-  if(store.allScore < 60){
+  if(store.allScore < store.gameCount + 1){
     store.count3++;
     store.allScore++;
   };
@@ -49,7 +61,7 @@ function downCount3(){
   };
 }
 function upCount4() {
-  if(store.allScore <60 ){
+  if(store.allScore < store.gameCount + 1){
     store.count4++;
     store.allScore++;
   };
@@ -61,12 +73,13 @@ function downCount4(){
   };
 }
 function onClickNext(){
-  store.gameCount++;
-  console.log(store.gameCount);
+  if(store.gameCount+1 == store.allScore){
+    store.gameCount ++;
+  };
   if(store.gameCount === 10){
     console.log("終了");;
     router.push({ path: "/gameresult" })
-  }
+  };
 }
 </script>
 

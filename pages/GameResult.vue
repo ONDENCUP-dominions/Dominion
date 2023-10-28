@@ -3,19 +3,9 @@ import { useCounterStore } from '@/stores/store';
 const store =  useCounterStore();
 const router = useRouter();
 function onClickPlayAgain(){
-  store.gameCount = 0;
-  store.count1 = 0;
-  store.count2 = 0;
-  store.count3 = 0;
-  store.count4 = 0;
   router.push({ path: "/game" });
 };
 function onClickFinish(){
-  store.gameCount = 0;
-  store.count1 = 0;
-  store.count2 = 0;
-  store.count3 = 0;
-  store.count4 = 0;
   router.push({ path: "/" }); 
 };
 
