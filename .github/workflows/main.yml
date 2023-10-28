@@ -22,7 +22,7 @@ jobs:
         run: yarn install
 
       - name: Build Nuxt.js
-        run: yarn generate
+        run: yarn build
 
       - name: List directory contents
         run: ls -la
