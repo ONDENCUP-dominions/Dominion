@@ -1,6 +1,24 @@
 <script setup lang="ts">
 import { useCounterStore } from '@/stores/store';
 const store =  useCounterStore();
+const router = useRouter();
+function onClickPlayAgain(){
+  store.gameCount = 0;
+  store.count1 = 0;
+  store.count2 = 0;
+  store.count3 = 0;
+  store.count4 = 0;
+  router.push({ path: "/game" });
+};
+function onClickFinish(){
+  store.gameCount = 0;
+  store.count1 = 0;
+  store.count2 = 0;
+  store.count3 = 0;
+  store.count4 = 0;
+  router.push({ path: "/" }); 
+};
+
 </script>
 
 
@@ -10,8 +28,8 @@ const store =  useCounterStore();
       <div class="score">2P:{{ store.count2 }}枚</div>
       <div class="score">3P:{{ store.count3 }}枚</div>
       <div class="score">4P:{{ store.count4 }}枚</div>
-      <Button class="again-button">Play Again</Button>
-      <Button class="finish-button">Finish</Button>
+      <Button class="again-button" @click="onClickPlayAgain">Play Again</Button>
+      <Button class="finish-button" @click="onClickFinish">Finish</Button>
     </div>
 </template>
 

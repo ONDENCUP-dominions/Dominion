@@ -1,10 +1,14 @@
 <script setup lang="ts">
+const router = useRouter();
+function onClickPlay(){
+  router.push({ path: "/gamestart" }) 
+}
 </script>
 
 <template>
     <div class="flex-content">
       <div class="title">ナンジャモンジャ</div>
-      <Button class="button-position">Play</Button>
+      <Button class="button-position" @click="onClickPlay">Play</Button>
     </div>
 </template>
 
@@ -16,7 +20,7 @@
   align-items: center;
 }
 .title{
-  margin-top: 55%;
+  margin-top: 260px;
   font-size: 40px;
 }
 .button-position{

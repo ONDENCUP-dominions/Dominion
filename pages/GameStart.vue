@@ -1,10 +1,19 @@
 <script setup lang="ts">
+const router = useRouter();
+
+function onClickStart(){
+  router.push({ path: "/game" });
+};
+
+function onClickTop(){
+  router.push({ path: "/" });
+};
 </script>
 
 <template>
     <div class="flex-content">
-      <Button class="start-button">Start</Button>
-      <Button class="top-button">Top</Button>
+      <Button class="start-button" @click="onClickStart">Start</Button>
+      <Button class="top-button" @click="onClickTop">Top</Button>
     </div>
 </template>
 
@@ -15,10 +24,10 @@
   align-items: center;
 }
 .start-button{
-  margin-top: 63%;
+  margin-top: 230px;
 }
 .top-button{
-  margin-top: 10%;
+  margin-top: 35px;
 }
 </style>
   

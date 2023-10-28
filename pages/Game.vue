@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useCounterStore } from '@/stores/store';
 const store =  useCounterStore();
+const router = useRouter();
 function upCount1() {
     store.count1++;
 };
@@ -28,7 +29,8 @@ function downCount4(){
 function onClickNext(){
   store.gameCount++;
   if(store.gameCount === 10){
-    console.log("終了");
+    console.log("終了");;
+    router.push({ path: "/gameresult" })
   }
 }
 </script>
