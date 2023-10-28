@@ -7,7 +7,6 @@ provider:
 
 package:
   patterns:
-    - "!**"
     - ".output/server/**"
 
 functions:
