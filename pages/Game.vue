@@ -1,6 +1,87 @@
+<script setup lang="ts">
+import { useCounterStore } from '@/stores/store';
+const store =  useCounterStore();
+const router = useRouter();
+function upCount1() {
+    store.count1++;
+};
+function downCount1(){
+    store.count2--;
+}
+function upCount2() {
+    store.count2++;
+};
+function downCount2(){
+    store.count2--;
+}
+function upCount3() {
+    store.count3++;
+};
+function downCount3(){
+    store.count3--;
+}
+function upCount4() {
+    store.count4++;
+};
+function downCount4(){
+    store.count4--;
+}
+function onClickNext(){
+  store.gameCount++;
+  if(store.gameCount === 10){
+    console.log("終了");;
+    router.push({ path: "/gameresult" })
+  }
+}
+</script>
+
 <template>
-    <div>
-      game page
-    </div>
-  </template>
+  <div class="flex-content">
+    <Button class="next-button" @click="onClickNext">Next{{ store.gameCount }}</Button>
+    <div class="card"></div>
+    <CountButton class="count1-button">
+      <div @click="upCount1">＋</div>
+      {{ store.count1 }}
+      <div @click="downCount1">－</div>
+    </CountButton>
+    <CountButton class="count-button">
+      <div @click="upCount2">＋</div>
+      {{ store.count2 }}
+      <div @click="downCount2">－</div>
+    </CountButton>
+    <CountButton class="count-button">
+      <div @click="upCount3">＋</div>
+      {{ store.count3 }}
+      <div @click="downCount3">－</div>
+    </CountButton>
+    <CountButton class="count-button">
+      <div @click="upCount4">＋</div>
+      {{ store.count4 }}
+      <div @click="downCount4">－</div>
+    </CountButton>
+  </div>
+</template>
+
+<style scoped>
+.flex-content{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.next-button{
+  margin-top: 26px;
+}
+.card{
+  background-color: gray;
+  width: 130px;
+  height: 180px;
+  margin-top: 30px;
+}
+.count1-button{
+  margin-top: 30px;
+}
+.count-button{
+  margin-top: 10px;
+}
+</style>
   
