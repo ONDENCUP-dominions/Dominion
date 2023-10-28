@@ -2,19 +2,21 @@
 </script>
 
 <template>
-    <div class="body flex-content">
+    <div class="flex-content">
       <div>nanjamonja</div>
-      <Button>Play</Button>
+      <Button class="button-position">Play</Button>
     </div>
 </template>
 
 <style scoped>
-.body{
-  width: 100vw;
-  height: 100vh;
-}
 .flex-content{
-  background-color: blue;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.button-position{
+  margin-top: 30px;
 }
 </style>
   
