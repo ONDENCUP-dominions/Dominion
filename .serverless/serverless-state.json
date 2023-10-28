@@ -173,7 +173,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/nuxt-app/dev/1698482322224-2023-10-28T08:38:42.224Z/nuxt-app.zip"
+                "S3Key": "serverless/nuxt-app/dev/1698490664289-2023-10-28T10:57:44.289Z/nuxt-app.zip"
               },
               "Handler": ".output/server/index.handler",
               "Runtime": "nodejs16.x",
@@ -191,14 +191,14 @@
               "NuxtSsrCoreLogGroup"
             ]
           },
-          "NuxtSsrCoreLambdaVersionMZcmlHGln1qO9WDHLgQGayEWQsXNPJpykzS4Be63C3Q": {
+          "NuxtSsrCoreLambdaVersion7MHnEyaRlrWr9VBejfqq9Mfah52E5Mb7iyPfasT9Y": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "NuxtSsrCoreLambdaFunction"
               },
-              "CodeSha256": "tzPoh5PdnMKlbHfOzhQSqgEvQbVcyqdC9yMTujICQ48="
+              "CodeSha256": "xX3uhFsYK7GK0z4Q+HaOwIOXTS6Amb1KHCT1pmEVNZ8="
             }
           },
           "NuxtSsrCoreLambdaFunctionUrl": {
@@ -237,7 +237,7 @@
           "NuxtSsrCoreLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "NuxtSsrCoreLambdaVersionMZcmlHGln1qO9WDHLgQGayEWQsXNPJpykzS4Be63C3Q"
+              "Ref": "NuxtSsrCoreLambdaVersion7MHnEyaRlrWr9VBejfqq9Mfah52E5Mb7iyPfasT9Y"
             },
             "Export": {
               "Name": "sls-nuxt-app-dev-NuxtSsrCoreLambdaFunctionQualifiedArn"
@@ -353,7 +353,7 @@
         "memory": 1024,
         "timeout": 6,
         "vpc": {},
-        "versionLogicalId": "NuxtSsrCoreLambdaVersionMZcmlHGln1qO9WDHLgQGayEWQsXNPJpykzS4Be63C3Q"
+        "versionLogicalId": "NuxtSsrCoreLambdaVersion7MHnEyaRlrWr9VBejfqq9Mfah52E5Mb7iyPfasT9Y"
       }
     },
     "configValidationMode": "warn",
@@ -371,7 +371,7 @@
         ],
         "artifactsS3KeyDirname": "serverless/nuxt-app/dev/code-artifacts",
         "artifact": "/Users/yanaitatsuya/workspace/Dominion/.serverless/nuxt-app.zip",
-        "artifactDirectoryName": "serverless/nuxt-app/dev/1698482322224-2023-10-28T08:38:42.224Z"
+        "artifactDirectoryName": "serverless/nuxt-app/dev/1698490664289-2023-10-28T10:57:44.289Z"
       },
       "functions": {
         "$ref": "$[\"service\"][\"functions\"]"
@@ -382,7 +382,7 @@
     "artifact": "/Users/yanaitatsuya/workspace/Dominion/.serverless/nuxt-app.zip"
   },
   "package": {
-    "artifactDirectoryName": "serverless/nuxt-app/dev/1698482322224-2023-10-28T08:38:42.224Z",
+    "artifactDirectoryName": "serverless/nuxt-app/dev/1698490664289-2023-10-28T10:57:44.289Z",
     "artifact": "nuxt-app.zip"
   }
 }
