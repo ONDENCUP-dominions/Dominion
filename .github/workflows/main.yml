@@ -24,15 +24,24 @@ jobs:
       - name: Build Nuxt.js application
         run: npm run build
 
+      - name: Set AWS_DEFAULT_REGION and Disable EC2 Metadata
+        run: |
+          echo "Setting AWS_DEFAULT_REGION"
+          echo "AWS_DEFAULT_REGION=${{secrets.MY_AWS_REGION}}" >> $GITHUB_ENV
+
+          echo "Setting AWS_EC2_METADATA_DISABLED"
+          echo "AWS_EC2_METADATA_DISABLED=true" >> $GITHUB_ENV
+        shell: bash
+
       - name: AWS Configure
         run: aws configure set aws_access_key_id ${{secrets.AWS_ACCOUNT_ID}}
         shell: bash
         env:
           AWS_ACCESS_KEY_ID: ${{secrets.AWS_ACCOUNT_ID}}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCOUNT_KEY }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCOUNT_KEY}}
           AWS_DEFAULT_REGION: ${{secrets.MY_AWS_REGION}}
 
       - name: Upload to S3
-        run: aws s3 sync ${{secrets.SOURCE_DIR}}  s3://${{secrets.AWS_S3_BUCKET}}
+        run: aws s3 sync ${{secrets.SOURCE_DIR}} s3://${{secrets.AWS_S3_BUCKET}}
         env:
           AWS_DEFAULT_REGION: ${{secrets.MY_AWS_REGION}}
