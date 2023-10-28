@@ -9,7 +9,8 @@ export const useCounterStore = defineStore(
     const count2 = ref(0);
     const count3 = ref(0);
     const count4 = ref(0);
+    const allScore = ref(0);
     const gameCount = ref(0);
-    return { count1, count2, count3, count4, gameCount };
+    return { count1, count2, count3, count4, allScore, gameCount };
   },
  );
