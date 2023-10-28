@@ -3,7 +3,7 @@
 
 <template>
     <div class="flex-content">
-      <div>nanjamonja</div>
+      <div class="title">ナンジャモンジャ</div>
       <Button class="button-position">Play</Button>
     </div>
 </template>
@@ -14,6 +14,10 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+.title{
+  margin-top: 55%;
+  font-size: 40px;
 }
 .button-position{
   margin-top: 30px;
