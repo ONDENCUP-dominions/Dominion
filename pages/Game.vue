@@ -3,28 +3,44 @@ import { useCounterStore } from '@/stores/store';
 const store =  useCounterStore();
 const router = useRouter();
 function upCount1() {
+  if(store.count1 < 60){
     store.count1++;
+  };
 };
 function downCount1(){
-    store.count2--;
+  if(store.count1 > 0){
+    store.count1--;
+  };
 }
 function upCount2() {
+  if(store.count2 < 60){
     store.count2++;
+  };
 };
 function downCount2(){
+  if(store.count2 > 0){
     store.count2--;
+  };
 }
 function upCount3() {
+  if(store.count3 < 60){
     store.count3++;
+  };
 };
 function downCount3(){
+  if(store.count3 > 0){
     store.count3--;
+  };
 }
 function upCount4() {
+  if(store.count4 <60 ){
     store.count4++;
+  };
 };
 function downCount4(){
+  if(store.count4 > 0){
     store.count4--;
+  };
 }
 function onClickNext(){
   store.gameCount++;
