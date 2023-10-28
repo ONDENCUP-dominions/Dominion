@@ -1,21 +1,20 @@
 <script setup lang="ts">
-import { useCounterStore } from "@/store/counter";
-import { storeToRefs } from "pinia";
-const counterStore = useCounterStore();
-const { increment } = counterStore;
-const { count } = storeToRefs(counterStore);
 </script>
 
 <template>
-    <div>
-      ナンジャもんじゃ
-      <div>Count:{{ count }}</div>
-      <button @click="increment">たすよ</button>
-      <br />
-      <NuxtLink to="/game">Play</NuxtLink>
+    <div class="body flex-content">
+      <div>nanjamonja</div>
+      <Button>Play</Button>
     </div>
 </template>
 
 <style scoped>
+.body{
+  width: 100vw;
+  height: 100vh;
+}
+.flex-content{
+  background-color: blue;
+}
 </style>
   
