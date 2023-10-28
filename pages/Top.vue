@@ -1,6 +1,7 @@
 <template>
     <div>
-      top page
+      ナンジャもんじゃ
+      <NuxtLink to="/game">Play</NuxtLink>
     </div>
   </template>
   
