@@ -6,7 +6,7 @@
       <input type="file" name="file" @change="onChange" />
     </form>
     <ul>
-      <li><img src="/nuxt3-file-upload.png" style="width: 200px" /></li>
+      <!-- <li><img src="/nuxt3-file-upload.png" style="width: 200px" /></li> -->
     </ul>
   </div>
 </template>
