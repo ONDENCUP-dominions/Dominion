@@ -27,9 +27,7 @@ function adjustCount(countType: 'count1' | 'count2' | 'count3' | 'count4', direc
 }
 
 function onClickNext(){
-  if(store.gameCount+1 == store.allScore){
-    store.gameCount ++;
-  };
+  store.gameCount ++;
   if(store.gameCount === 36){
     console.log("終了");;
     router.push({ path: "/gameresult" })
