@@ -76,7 +76,7 @@ function onClickNext(){
   if(store.gameCount+1 == store.allScore){
     store.gameCount ++;
   };
-  if(store.gameCount === 10){
+  if(store.gameCount === 3){
     console.log("終了");;
     router.push({ path: "/gameresult" })
   };
