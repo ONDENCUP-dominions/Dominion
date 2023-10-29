@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useCounterStore } from '@/stores/store';
+import { ref, onMounted } from 'vue';
 const store =  useCounterStore();
 const router = useRouter();
 function upCount1() {
@@ -52,27 +53,30 @@ function downCount4(){
 }
 function onClickNext(){
   store.gameCount++;
-  if(store.gameCount === 10){
+  if(store.gameCount === 36){
     console.log("終了");;
     router.push({ path: "/gameresult" })
   }
 }
-const selectedCards = ref([]);
 
-onMounted(() => {
-  // 12枚のカードからランダムに3枚を選ぶ
-  let cards = Array.from({ length: 12 }, (_, i) => i + 1);
-  for (let i = 0; i < 3; i++) {
-    const randomIndex = Math.floor(Math.random() * cards.length);
-    selectedCards.value.push(cards[randomIndex]);
-    cards = cards.filter((_, index) => index !== randomIndex);
+const allCards = Array.from({ length: 12 }, (_, i) => i + 1)
+  .reduce((acc, card) => acc.concat([card, card, card]), []); // 12枚のカードを3回ずつ追加
+
+// Fisher-Yatesアルゴリズムを使用して配列をシャッフル
+function shuffle(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
   }
-});
+  return array;
+}
+
+const shuffledCards = ref(shuffle([...allCards]));
 
 const getCardImage = () => {
-  const index = (store.gameCount - 1) % 3;
-  console
-  return `~/assets/card${selectedCards.value[index]}.png`;
+  const cardNumber = shuffledCards.value[store.gameCount];
+  console.log(cardNumber);
+  return `image${cardNumber}.png`;
 };
 
 
@@ -81,7 +85,7 @@ const getCardImage = () => {
 <template>
   <div class="flex-content">
     <Button class="next-button" @click="onClickNext">Next{{ store.gameCount }}</Button>
-    <image class="card" :src="getCardImage()"></image>
+    <img class="card" :src="getCardImage()"/>
     <CountButton class="count1-button">
       <div @click="upCount1">＋</div>
       {{ store.count1 }}
