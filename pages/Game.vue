@@ -1,9 +1,25 @@
 <script setup lang="ts">
 import { useCounterStore } from '@/stores/store';
+import { filename } from 'pathe/utils';
+import { onMounted } from 'vue';
+
 const store =  useCounterStore();
 const router = useRouter();
+
+onMounted(() =>{
+  console.log('onMounted');
+  store.gameCount = 0;
+  store.count1 = 0;
+  store.count2 = 0;
+  store.count3 = 0;
+  store.count4 = 0;
+  store.allScore = 0;
+})
+
+const fileName = ['Jolteon.jpg', 'nanjamo.jpg'];
+
 function upCount1() {
-  if(store.allScore < 60){
+  if(store.allScore < store.gameCount + 1){
     store.count1++;
     store.allScore++;
   };
@@ -15,7 +31,7 @@ function downCount1(){
   };
 }
 function upCount2() {
-  if(store.allScore < 60){
+  if(store.allScore < store.gameCount + 1){
     store.count2++;
     store.allScore++;
   };
@@ -27,7 +43,7 @@ function downCount2(){
   };
 }
 function upCount3() {
-  if(store.allScore < 60){
+  if(store.allScore < store.gameCount + 1){
     store.count3++;
     store.allScore++;
   };
@@ -39,7 +55,7 @@ function downCount3(){
   };
 }
 function upCount4() {
-  if(store.allScore <60 ){
+  if(store.allScore < store.gameCount + 1){
     store.count4++;
     store.allScore++;
   };
@@ -51,18 +67,20 @@ function downCount4(){
   };
 }
 function onClickNext(){
-  store.gameCount++;
-  if(store.gameCount === 10){
+  if(store.gameCount+1 == store.allScore){
+    store.gameCount ++;
+  };
+  if(store.gameCount === 3){
     console.log("終了");;
     router.push({ path: "/gameresult" })
-  }
+  };
 }
 </script>
 
 <template>
   <div class="flex-content">
     <Button class="next-button" @click="onClickNext">Next{{ store.gameCount }}</Button>
-    <div class="card"></div>
+    <img class="card" :src="fileName[store.gameCount]" />
     <CountButton class="count1-button">
       <div @click="upCount1">＋</div>
       {{ store.count1 }}
