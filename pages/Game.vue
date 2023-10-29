@@ -3,60 +3,37 @@ import { useCounterStore } from '@/stores/store';
 import { ref, onMounted } from 'vue';
 const store =  useCounterStore();
 const router = useRouter();
-function upCount1() {
-  if(store.allScore < 60){
-    store.count1++;
+
+onMounted(() =>{
+  console.log('onMounted');
+  store.gameCount = 0;
+  store.count1 = 0;
+  store.count2 = 0;
+  store.count3 = 0;
+  store.count4 = 0;
+  store.allScore = 0;
+})
+
+const fileName = ['Jolteon.jpg', 'nanjamo.jpg'];
+
+function adjustCount(countType: 'count1' | 'count2' | 'count3' | 'count4', direction: 'up' | 'down') {
+  if (direction === 'up' && store.allScore < store.gameCount + 1) {
+    store[countType]++;
     store.allScore++;
-  };
-};
-function downCount1(){
-  if(store.count1 > 0){
-    store.count1--;
+  } else if (direction === 'down' && store[countType] > 0) {
+    store[countType]--;
     store.allScore--;
-  };
+  }
 }
-function upCount2() {
-  if(store.allScore < 60){
-    store.count2++;
-    store.allScore++;
-  };
-};
-function downCount2(){
-  if(store.count2 > 0){
-    store.count2--;
-    store.allScore--;
-  };
-}
-function upCount3() {
-  if(store.allScore < 60){
-    store.count3++;
-    store.allScore++;
-  };
-};
-function downCount3(){
-  if(store.count3 > 0){
-    store.count3--;
-    store.allScore--;
-  };
-}
-function upCount4() {
-  if(store.allScore <60 ){
-    store.count4++;
-    store.allScore++;
-  };
-};
-function downCount4(){
-  if(store.count4 > 0){
-    store.count4--;
-    store.allScore--;
-  };
-}
+
 function onClickNext(){
-  store.gameCount++;
+  if(store.gameCount+1 == store.allScore){
+    store.gameCount ++;
+  };
   if(store.gameCount === 36){
     console.log("終了");;
     router.push({ path: "/gameresult" })
-  }
+  };
 }
 
 const allCards = Array.from({ length: 12 }, (_, i) => i + 1)
@@ -85,26 +62,29 @@ const getCardImage = () => {
 <template>
   <div class="flex-content">
     <Button class="next-button" @click="onClickNext">Next{{ store.gameCount }}</Button>
+
     <img class="card" :src="getCardImage()"/>
+
     <CountButton class="count1-button">
-      <div @click="upCount1">＋</div>
+      <div @click="adjustCount('count1', 'up')">＋</div>
       {{ store.count1 }}
-      <div @click="downCount1">－</div>
+      <div @click="adjustCount('count1', 'down')">－</div>
     </CountButton>
+
     <CountButton class="count-button">
-      <div @click="upCount2">＋</div>
+      <div @click="adjustCount('count2', 'up')">＋</div>
       {{ store.count2 }}
-      <div @click="downCount2">－</div>
+      <div @click="adjustCount('count2', 'down')">－</div>
     </CountButton>
     <CountButton class="count-button">
-      <div @click="upCount3">＋</div>
+      <div @click="adjustCount('count3', 'up')">＋</div>
       {{ store.count3 }}
-      <div @click="downCount3">－</div>
+      <div @click="adjustCount('count3', 'down')">－</div>
     </CountButton>
     <CountButton class="count-button">
-      <div @click="upCount4">＋</div>
+      <div @click="adjustCount('count4', 'up')">＋</div>
       {{ store.count4 }}
-      <div @click="downCount4">－</div>
+      <div @click="adjustCount('count4', 'down')">－</div>
     </CountButton>
   </div>
 </template>
