@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { useCounterStore } from '@/stores/store';
-import { onMounted } from 'vue';
+import { ref ,onMounted } from 'vue';
 
 const store =  useCounterStore();
 const router = useRouter();
@@ -17,57 +16,16 @@ onMounted(() =>{
 
 const fileName = ['Jolteon.jpg', 'nanjamo.jpg'];
 
-function upCount1(num:globalThis.Ref<number>) {
-  if(store.allScore < store.gameCount + 1){
-    console.log(num);
-    num++;
+function adjustCount(countType: 'count1' | 'count2' | 'count3' | 'count4', direction: 'up' | 'down') {
+  if (direction === 'up' && store.allScore < store.gameCount + 1) {
+    store[countType]++;
     store.allScore++;
-  };
-};
+  } else if (direction === 'down' && store[countType] > 0) {
+    store[countType]--;
+    store.allScore--;
+  }
+}
 
-
-function downCount1(){
-  if(store.count1 > 0){
-    store.count1--;
-    store.allScore--;
-  };
-}
-function upCount2() {
-  if(store.allScore < store.gameCount + 1){
-    store.count2++;
-    store.allScore++;
-  };
-};
-function downCount2(){
-  if(store.count2 > 0){
-    store.count2--;
-    store.allScore--;
-  };
-}
-function upCount3() {
-  if(store.allScore < store.gameCount + 1){
-    store.count3++;
-    store.allScore++;
-  };
-};
-function downCount3(){
-  if(store.count3 > 0){
-    store.count3--;
-    store.allScore--;
-  };
-}
-function upCount4() {
-  if(store.allScore < store.gameCount + 1){
-    store.count4++;
-    store.allScore++;
-  };
-};
-function downCount4(){
-  if(store.count4 > 0){
-    store.count4--;
-    store.allScore--;
-  };
-}
 function onClickNext(){
   if(store.gameCount+1 == store.allScore){
     store.gameCount ++;
@@ -84,24 +42,25 @@ function onClickNext(){
     <Button class="next-button" @click="onClickNext">Next{{ store.gameCount }}</Button>
     <img class="card" :src="fileName[store.gameCount]" />
     <CountButton class="count1-button">
-      <div @click="upCount1(store.count1)">＋</div>
+      <div @click="adjustCount('count1', 'up')">＋</div>
       {{ store.count1 }}
-      <div @click="downCount1">－</div>
+      <div @click="adjustCount('count1', 'down')">－</div>
     </CountButton>
+
     <CountButton class="count-button">
-      <div @click="upCount2">＋</div>
+      <div @click="adjustCount('count2', 'up')">＋</div>
       {{ store.count2 }}
-      <div @click="downCount2">－</div>
+      <div @click="adjustCount('count2', 'down')">－</div>
     </CountButton>
     <CountButton class="count-button">
-      <div @click="upCount3">＋</div>
+      <div @click="adjustCount('count3', 'up')">＋</div>
       {{ store.count3 }}
-      <div @click="downCount3">－</div>
+      <div @click="adjustCount('count3', 'down')">－</div>
     </CountButton>
     <CountButton class="count-button">
-      <div @click="upCount4">＋</div>
+      <div @click="adjustCount('count4', 'up')">＋</div>
       {{ store.count4 }}
-      <div @click="downCount4">－</div>
+      <div @click="adjustCount('count4', 'down')">－</div>
     </CountButton>
   </div>
 </template>
