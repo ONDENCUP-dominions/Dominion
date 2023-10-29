@@ -1,4 +1,4 @@
-name: Deploy to S3 and Update Lambda
+name: Build and Deploy to S3
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  deploy:
+  build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
@@ -16,23 +16,21 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: 18.x
+          node-version: 16.x
 
       - name: Install dependencies
-        run: npm install
+        run: yarn install
 
-      - name: Build Nuxt.js application
-        run: npm run build
+      - name: Build Nuxt.js
+        run: yarn build
 
-      - name: AWS Configure
-        run: aws configure set aws_access_key_id ${{secrets.AWS_ACCOUNT_ID}}
-        shell: bash
+      - name: List directory contents
+        run: ls -la
+
+      - name: Deploy to S3
         env:
-          AWS_ACCESS_KEY_ID: ${{secrets.AWS_ACCOUNT_ID}}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCOUNT_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCOUNT_KEY }}
-          AWS_DEFAULT_REGION: ${{secrets.MY_AWS_REGION}}
+          AWS_EC2_METADATA_DISABLED: true
 
-      - name: Upload to S3
-        run: aws s3 sync ${{secrets.SOURCE_DIR}}  s3://${{secrets.AWS_S3_BUCKET}}
-        env:
-          AWS_DEFAULT_REGION: ${{secrets.MY_AWS_REGION}}
+        run: aws s3 sync .output/public s3://${{ secrets.AWS_S3_BUCKET }}

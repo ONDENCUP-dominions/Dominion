@@ -35,12 +35,33 @@ function onClickNext(){
     router.push({ path: "/gameresult" })
   };
 }
+const selectedCards = ref([]);
+
+onMounted(() => {
+  // 12枚のカードからランダムに3枚を選ぶ
+  let cards = Array.from({ length: 12 }, (_, i) => i + 1);
+  for (let i = 0; i < 3; i++) {
+    const randomIndex = Math.floor(Math.random() * cards.length);
+    selectedCards.value.push(cards[randomIndex]);
+    cards = cards.filter((_, index) => index !== randomIndex);
+  }
+});
+
+const getCardImage = () => {
+  const index = (store.gameCount - 1) % 3;
+  console
+  return `~/assets/card${selectedCards.value[index]}.png`;
+};
+
+
 </script>
 
 <template>
   <div class="flex-content">
     <Button class="next-button" @click="onClickNext">Next{{ store.gameCount }}</Button>
-    <img class="card" :src="fileName[store.gameCount]" />
+
+    <image class="card" :src="getCardImage()"></image>
+    
     <CountButton class="count1-button">
       <div @click="adjustCount('count1', 'up')">＋</div>
       {{ store.count1 }}
@@ -75,7 +96,6 @@ function onClickNext(){
   margin-top: 26px;
 }
 .card{
-  background-color: gray;
   width: 130px;
   height: 180px;
   margin-top: 30px;

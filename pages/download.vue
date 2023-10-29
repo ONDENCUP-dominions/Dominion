@@ -1,0 +1,31 @@
+<template>
+    <h1>File Download</h1>
+  
+  <h1 id="bucket">Bucket : </h1>
+  <h2 id="folder">Folder : </h2>
+  
+  <table id="file-table">
+    <thead>
+      <tr>
+        <th><input type="checkbox" id="check-all"></th>
+        <th>File Name</th>
+        <th>File Size</th>
+        <th>Last Modified</th>
+      </tr>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
+
+  <div class="flatbox-right">
+    <div><input type="checkbox" id="zip"><label for="zip">Create ZIP</label></div>
+    <div><button id="submit" disabled>Download</button></div>
+  </div>
+  <hr>
+  <div class="flatbox-left">
+    <div><button id="back" class="sub-button"><i class="arrow"></i>Back</button></div>
+    <div><input type="checkbox" id="sign-out"><label for="sign-out">Sign-out</label></div>
+  </div>
+ 
+  <div id="spinner"></div>
+</template>
