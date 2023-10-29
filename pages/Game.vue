@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { useCounterStore } from '@/stores/store';
-import { filename } from 'pathe/utils';
 import { onMounted } from 'vue';
 
 const store =  useCounterStore();
@@ -18,12 +17,15 @@ onMounted(() =>{
 
 const fileName = ['Jolteon.jpg', 'nanjamo.jpg'];
 
-function upCount1() {
+function upCount1(num:globalThis.Ref<number>) {
   if(store.allScore < store.gameCount + 1){
-    store.count1++;
+    console.log(num);
+    num++;
     store.allScore++;
   };
 };
+
+
 function downCount1(){
   if(store.count1 > 0){
     store.count1--;
@@ -82,7 +84,7 @@ function onClickNext(){
     <Button class="next-button" @click="onClickNext">Next{{ store.gameCount }}</Button>
     <img class="card" :src="fileName[store.gameCount]" />
     <CountButton class="count1-button">
-      <div @click="upCount1">＋</div>
+      <div @click="upCount1(store.count1)">＋</div>
       {{ store.count1 }}
       <div @click="downCount1">－</div>
     </CountButton>
