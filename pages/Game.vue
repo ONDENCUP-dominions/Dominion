@@ -16,13 +16,7 @@ onMounted(() =>{
   store.allScore = 0;
 })
 
-
-const glob = import.meta.glob('~/public/*jpg', { eager: true });
-const images = Object.fromEntries(
-  Object.entries(glob).map(([key, value]) => [filename(key), value.default])
-);
-
-const dynamic_image_name = ['Jolteon','nanjamo'];
+const fileName = ['Jolteon.jpg', 'nanjamo.jpg'];
 
 function upCount1() {
   if(store.allScore < store.gameCount + 1){
@@ -86,7 +80,7 @@ function onClickNext(){
 <template>
   <div class="flex-content">
     <Button class="next-button" @click="onClickNext">Next{{ store.gameCount }}</Button>
-    <img class="card" :src="images[dynamic_image_name[store.gameCount]]" />
+    <img class="card" :src="fileName[store.gameCount]" />
     <CountButton class="count1-button">
       <div @click="upCount1">＋</div>
       {{ store.count1 }}
